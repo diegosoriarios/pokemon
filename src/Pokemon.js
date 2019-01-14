@@ -15,7 +15,8 @@ class Pokemon extends Component {
             xp: 0,
             tipo: '',
             enemy: [],
-            showModal: false
+            showModal: false,
+            isLoading: true
         }
     }
     componentDidMount = () => {
@@ -33,13 +34,15 @@ class Pokemon extends Component {
                         selected: data.selected,
                         level: data.pokemon[index].level,
                         xp: data.pokemon[index].xp,
-                        tipo: data.pokemon[index].tipo
+                        tipo: data.pokemon[index].tipo,
+                        isLoading: false
                     })
                 }
             })
             .catch(err => {
                 console.error(err)
             })
+        Modal.setAppElement('#root')
     }
 
     training = () => {
@@ -148,13 +151,16 @@ class Pokemon extends Component {
                         "nome": result.data.name,
                         "front": result.data.sprites.front_default,
                         "tipo": result.data.types[0].type.name,
+                        "level": this.state.level,
+                        "xp": this.state.xp,
                         "moves": [
                             result.data.moves[rand[0]].move.name,
                             result.data.moves[rand[1]].move.name,
                             result.data.moves[rand[2]].move.name,
                             result.data.moves[rand[3]].move.name,
                         ],
-                    })
+                    }),
+                    isLoading: false
                 }, () => {
                     this.savePokemon()
                 })
@@ -165,7 +171,9 @@ class Pokemon extends Component {
     }
 
     render() {
-        if (this.state.pokemon.length > 0) {
+        console.log(this.state.isLoading)
+        console.log(this.state.xp)
+        if (!this.state.isLoading) {
             return (
                 <div className="App">
                     <p>{this.state.pokemon[this.state.selected].nome}</p>
@@ -180,11 +188,12 @@ class Pokemon extends Component {
                     </ul><br /><br /><br /><br />
                     <button onClick={() => this.training()}>Treinar</button>
                     <button onClick={() => this.battle()}>Battle</button>
-                    <Modal isOpen={this.state.showModal}>
+                    <Modal isOpen={this.state.showModal} className="modal" contentLabel="Example Modal">
                         <h3>Battle</h3>
                         <p>{this.state.enemy.nome}</p>
-                        {/* <img src={this.state.enemy.front} alt={this.state.enemy].nome} /> */}
+                        <img src={this.state.enemy.front} alt={this.state.enemy.nome} />
                         <p>{this.state.enemy.level}</p>
+                        <button onClick={() => this.setState({showModal: false})}>Close</button>
                     </Modal>
                 </div>
             );

@@ -7,15 +7,17 @@
       "tipo": "",
       "pokemon": [
         {
-          "id": 108,
-          "nome": "lickitung",
-          "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/108.png",
-          "tipo": "normal",
+          "id": 85,
+          "nome": "dodrio",
+          "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/85.png",
+          "tipo": "flying",
+          "level": 1,
+          "xp": 0,
           "moves": [
-            "toxic",
-            "secret-power",
-            "ice-punch",
-            "magnitude"
+            "return",
+            "sky-attack",
+            "natural-gift",
+            "substitute"
           ]
         }
       ],
