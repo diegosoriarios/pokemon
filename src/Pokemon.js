@@ -17,8 +17,6 @@ class Pokemon extends Component {
             enemy: [],
             showModal: false,
             isLoading: true,
-            enemyHp: 25,
-            playerHp: 25,
         }
     }
     componentDidMount = () => {
@@ -92,6 +90,7 @@ class Pokemon extends Component {
                 let enemy = {
                     "nome": result.data.name,
                     "front": result.data.sprites.front_default,
+                    "hp": result.data.order,
                     "tipo": result.data.types[0].type.name,
                     "moves": [
                         result.data.moves[rand[0]].move.name,
@@ -153,6 +152,7 @@ class Pokemon extends Component {
                         "nome": result.data.name,
                         "front": result.data.sprites.front_default,
                         "tipo": result.data.types[0].type.name,
+                        "hp": result.data.order,
                         "level": this.state.level,
                         "xp": this.state.xp,
                         "moves": [
@@ -180,8 +180,10 @@ class Pokemon extends Component {
              .then(result => {
                 let hit = Math.floor(Math.random() * 100)
                 if(hit < result.accuracy){
+                    let aux = this.state.enemy
+                    aux.hp = this.state.enemy.hp - (result.pp)
                     this.setState({
-                        enemyHp: this.state.enemyHp - (result.pp)
+                        enemy: aux
                     })
                 }else{
                     console.log('ERRRRROU')
@@ -202,8 +204,10 @@ class Pokemon extends Component {
              .then(result => {
                 let hit = Math.floor(Math.random() * 100)
                 if(hit < result.accuracy){
+                    let aux2 = this.state.pokemon
+                    aux2[this.state.selected].hp = this.state.pokemon[this.state.selected].hp - (result.pp)
                     this.setState({
-                        playerHp: this.state.playerHp - (result.pp)
+                        pokemon: aux2
                     })
                 }else{
                     console.log('ERRRRROU')
@@ -230,12 +234,12 @@ class Pokemon extends Component {
                         <h3>Battle</h3>
                         <p>{this.state.enemy.nome}</p>
                         <img src={this.state.enemy.front} alt={this.state.enemy.nome} />
-                        <p>{this.state.enemyHp}</p>
+                        <p>{this.state.enemy.hp}</p>
                         <p>{this.state.enemy.level}</p>
                         <br /><br />
                         <p>{this.state.pokemon[this.state.selected].nome}</p>
                         <img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} />
-                        <p>{this.state.playerHp}</p>
+                        <p>{this.state.pokemon[this.state.selected].hp}</p>
                         <ul>
                             <li onClick={() => this.attack(0)}>{this.state.pokemon[this.state.selected].moves[0]}</li>
                             <li onClick={() => this.attack(1)}>{this.state.pokemon[this.state.selected].moves[1]}</li>

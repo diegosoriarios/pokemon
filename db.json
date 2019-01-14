@@ -7,17 +7,18 @@
       "tipo": "",
       "pokemon": [
         {
-          "id": 85,
-          "nome": "dodrio",
-          "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/85.png",
+          "id": 42,
+          "nome": "golbat",
+          "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/42.png",
           "tipo": "flying",
+          "hp": 65,
           "level": 1,
           "xp": 0,
           "moves": [
-            "return",
-            "sky-attack",
-            "natural-gift",
-            "substitute"
+            "take-down",
+            "absorb",
+            "thief",
+            "haze"
           ]
         }
       ],
