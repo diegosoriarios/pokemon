@@ -4,18 +4,18 @@
       "username": "sr_ninguem",
       "password": "teste",
       "selected": 0,
+      "tipo": "",
       "pokemon": [
         {
-          "id": 14,
-          "nome": "kakuna",
-          "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png",
-          "level": 1,
-          "xp": 0,
+          "id": 108,
+          "nome": "lickitung",
+          "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/108.png",
+          "tipo": "normal",
           "moves": [
-            "string-shot",
-            "harden",
-            "electroweb",
-            "iron-defense"
+            "toxic",
+            "secret-power",
+            "ice-punch",
+            "magnitude"
           ]
         }
       ],
