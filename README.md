@@ -4,6 +4,7 @@ Usando:
 * (PokeApi)[https://pokeapi.co/docs/v2.html/]
 * Talvez usar (React-Swipe)[https://github.com/voronianski/react-swipe]
 * Modal com (React-Modal)[https://github.com/reactjs/react-modal]
+* Ui com (nes.css)[https://github.com/nostalgic-css/NES.css]
 
 Usando a porta 3004
 ```

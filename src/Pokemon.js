@@ -17,6 +17,8 @@ class Pokemon extends Component {
             enemy: [],
             showModal: false,
             isLoading: true,
+            enemyHp: 0,
+            playerHp: 0,
         }
     }
     componentDidMount = () => {
@@ -35,7 +37,8 @@ class Pokemon extends Component {
                         level: data.pokemon[index].level,
                         xp: data.pokemon[index].xp,
                         tipo: data.pokemon[index].tipo,
-                        isLoading: false
+                        isLoading: false,
+                        playerHp: data.pokemon[index].hp
                     })
                 }
             })
@@ -46,8 +49,6 @@ class Pokemon extends Component {
     }
 
     training = () => {
-        console.log('XP' + this.state.xp)
-        console.log('Level ' + this.state.level)
         if (this.state.xp >= Math.floor((Math.pow(2.5, this.state.level)))) {
             this.setState({
                 xp: this.state.xp - Math.floor((Math.pow(2.5, this.state.level))),
@@ -101,6 +102,7 @@ class Pokemon extends Component {
                 }
                 this.setState({
                     enemy,
+                    enemyHp: result.data.order,
                     showModal: true
                 })
             })
@@ -162,6 +164,7 @@ class Pokemon extends Component {
                             result.data.moves[rand[3]].move.name,
                         ],
                     }),
+                    playerHp: result.data.order,
                     isLoading: false
                 }, () => {
                     this.savePokemon()
@@ -188,7 +191,13 @@ class Pokemon extends Component {
                 }else{
                     console.log('ERRRRROU')
                 }
-                this.enemyAttack()
+                if(this.state.enemy.hp <= 0){
+                    //aumentar HP do player
+                    //aumentar XP do player
+                    this.battle()
+                }else{
+                    this.enemyAttack()
+                }
              })
              .catch(err => {
                  console.error(err)
@@ -219,8 +228,6 @@ class Pokemon extends Component {
     }
 
     render() {
-        console.log(this.state.isLoading)
-        console.log(this.state.xp)
         if (!this.state.isLoading) {
             return (
                 <div className="App">
@@ -228,9 +235,9 @@ class Pokemon extends Component {
                     <img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} />
                     <p>{this.state.level}</p>
                     <p>{this.state.xp.toFixed(2)}</p><br /><br /><br /><br />
-                    <button onClick={() => this.training()}>Treinar</button>
-                    <button onClick={() => this.battle()}>Battle</button>
-                    <Modal isOpen={this.state.showModal} className="modal" contentLabel="Example Modal">
+                    <button className="nes-btn" onClick={() => this.training()}>Treinar</button>
+                    <button className="nes-btn" onClick={() => this.battle()}>Battle</button>
+                    <Modal isOpen={this.state.showModal} className="nes-container is-rounded modal" contentLabel="Example Modal">
                         <h3>Battle</h3>
                         <p>{this.state.enemy.nome}</p>
                         <img src={this.state.enemy.front} alt={this.state.enemy.nome} />
@@ -239,14 +246,16 @@ class Pokemon extends Component {
                         <br /><br />
                         <p>{this.state.pokemon[this.state.selected].nome}</p>
                         <img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} />
-                        <p>{this.state.pokemon[this.state.selected].hp}</p>
-                        <ul>
+                        <p>{this.state.pokemon[this.state.selected].hp}/{this.state.playerHp}</p>
+                        
+                        <progress className="nes-progress" value={this.state.pokemon[this.state.selected].hp} max={this.state.playerHp}></progress>
+                        <ul className="attackList">
                             <li onClick={() => this.attack(0)}>{this.state.pokemon[this.state.selected].moves[0]}</li>
                             <li onClick={() => this.attack(1)}>{this.state.pokemon[this.state.selected].moves[1]}</li>
                             <li onClick={() => this.attack(2)}>{this.state.pokemon[this.state.selected].moves[2]}</li>
                             <li onClick={() => this.attack(3)}>{this.state.pokemon[this.state.selected].moves[3]}</li>
-                        </ul><br /><br /><br /><br />
-                        <button onClick={() => this.setState({showModal: false})}>Close</button>
+                        </ul><br />
+                        <button className="nes-btn" onClick={() => this.setState({showModal: false})}>Close</button>
                     </Modal>
                 </div>
             );

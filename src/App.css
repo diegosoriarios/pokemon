@@ -1,63 +1,75 @@
-* {
-  outline: none;
-}
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.App input {
-  text-align: center;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (max-width: 600px) {
+  * {
+    outline: none;
+    font-family: 'Press Start 2P', cursive;
   }
-  to {
-    transform: rotate(360deg);
+
+  .App {
+    text-align: center;
   }
-}
 
-li {
-  list-style-type: none;
-  text-align: center;
-}
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+  }
 
-.modal {
-  width: 80%;
-  text-align: center;
-  border: 1px solid black;
-  outline: none;
-  margin: 5% auto;
-  background-color: white;
-}
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
 
-ul {
-  padding-left: 0;
-  margin: 0;
-}
+  .App-link {
+    color: #61dafb;
+  }
 
-button {
-  border: 1px solid black;
+  .App input {
+    text-align: center;
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  li {
+    list-style-type: none;
+    text-align: center;
+  }
+
+  .modal {
+    text-align: center;
+    background-color: white;
+  }
+
+  ul {
+    padding-left: 0;
+    margin: 0;
+  }
+
+  button {
+    border: 1px solid black;
+  }
+
+  .attackList {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .attackList li{  
+    border: 1px solid black;
+    padding: 1%;
+  }
 }
