@@ -1,3 +1,7 @@
+* {
+  outline: none;
+}
+
 .App {
   text-align: center;
 }
@@ -41,5 +45,19 @@ li {
 }
 
 .modal {
-  width: 90%;
+  width: 80%;
+  text-align: center;
+  border: 1px solid black;
+  outline: none;
+  margin: 5% auto;
+  background-color: white;
+}
+
+ul {
+  padding-left: 0;
+  margin: 0;
+}
+
+button {
+  border: 1px solid black;
 }

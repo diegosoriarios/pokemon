@@ -177,15 +177,9 @@ class Pokemon extends Component {
             return (
                 <div className="App">
                     <p>{this.state.pokemon[this.state.selected].nome}</p>
-                    {/* <img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} /> */}
+                    <img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} />
                     <p>{this.state.level}</p>
-                    <p>{this.state.xp.toFixed(2)}</p>
-                    <ul>
-                        <li>{this.state.pokemon[this.state.selected].moves[0]}</li>
-                        <li>{this.state.pokemon[this.state.selected].moves[1]}</li>
-                        <li>{this.state.pokemon[this.state.selected].moves[2]}</li>
-                        <li>{this.state.pokemon[this.state.selected].moves[3]}</li>
-                    </ul><br /><br /><br /><br />
+                    <p>{this.state.xp.toFixed(2)}</p><br /><br /><br /><br />
                     <button onClick={() => this.training()}>Treinar</button>
                     <button onClick={() => this.battle()}>Battle</button>
                     <Modal isOpen={this.state.showModal} className="modal" contentLabel="Example Modal">
@@ -196,7 +190,7 @@ class Pokemon extends Component {
                         <p>{this.state.enemy.level}</p>
                         <br /><br /><br /><br />
                         <p>{this.state.pokemon[this.state.selected].nome}</p>
-                        {/* <img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} /> */}
+                        <img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} />
                         <p>HP</p>
                         <ul>
                             <li>{this.state.pokemon[this.state.selected].moves[0]}</li>
