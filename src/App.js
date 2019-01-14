@@ -1,71 +1,83 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import Pokemon from './Pokemon';
+import string from './string';
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
-      pokemon: [],
-      selected: 0
+      logged: false,
+      username: '',
+      password: '',
+      confirm: '',
+      signUp: false,
+      id: 0,
     }
   }
-  componentDidMount = () => {
-    axios.get('https://pokeapi.co/api/v2/generation/1/')
-         .then(result => {
-           let rand = Math.floor(Math.random() * result.data.pokemon_species.length)
-           this.getData(result.data.pokemon_species[rand].url)
-         })
-         .catch(err => {
-           console.error(err);
-         })
-  }
 
-  getData = (url) => {
-    url = url.replace("-species/", "/");
-    axios.get(url)
-         .then(result => {
-           console.log(result.data)
-           let rand = [Math.floor(Math.random() * result.data.moves.length),
-                   Math.floor(Math.random() * result.data.moves.length),
-                   Math.floor(Math.random() * result.data.moves.length),
-                   Math.floor(Math.random() * result.data.moves.length)]
-           this.setState({
-             pokemon: this.state.pokemon.concat({
-              "id": result.data.id,
-              "nome": result.data.name,
-              "front": result.data.sprites.front_default,
-              "moves": [
-                result.data.moves[rand[0]].move.name,
-                result.data.moves[rand[1]].move.name,
-                result.data.moves[rand[2]].move.name,
-                result.data.moves[rand[3]].move.name,
-              ],
-             })
+  checkLogin = () => {
+    axios.get(`${string.URL}/users`)
+         .then(response => {
+           response.data.forEach(value => {
+             if(value.username === this.state.username && value.password === this.state.password){
+              console.log('LOG')
+              this.setState({
+                logged: true,
+                id: value.id
+              })
+             }
            })
          })
          .catch(err => {
-           console.error(err);
+           console.error(err)
          })
   }
 
-  render() {
-    console.log(this.state.pokemon)
-    if(this.state.pokemon.length > 0){
-      return (
-        <div className="App">
-          <p>{this.state.pokemon[this.state.selected].nome}</p>
-          <img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} />
-          <ul>
-            <li>{this.state.pokemon[this.state.selected].moves[0]}</li>
-            <li>{this.state.pokemon[this.state.selected].moves[1]}</li>
-            <li>{this.state.pokemon[this.state.selected].moves[2]}</li>
-            <li>{this.state.pokemon[this.state.selected].moves[3]}</li>
-          </ul>
-        </div>
-      );
+  createAccount = () => {
+    axios.post(`${string.URL}/users`, {
+      "username": this.state.username,
+      "passowrd": this.state.username
+      }).then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
+  checkPassword = () => {
+    if(this.state.password.length >= 6 && this.state.password === this.state.confirm){
+      return false;
+    }
+    return true;
+  }
+
+  render(){
+    if(this.state.logged){
+      return <Pokemon id={this.state.id} password={this.state.password} username={this.state.username} />
     }else{
-      return <p>Carregando</p>
+      if(this.state.signUp){
+        return (
+          <div className="App">
+            <input type="text" placeholder="username" value={this.state.username} onChange={e => this.setState({username: e.target.value})} />
+            <input type="password" placeholder="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})} />
+            <input type="password" placeholder="confirm" value={this.state.confirm} onChange={e => this.setState({confirm: e.target.value})} />
+            <button onClick={() => this.createAccount()} disabled={this.checkPassword()}>Create Account</button>
+            <button onClick={() => this.setState({signUp: false})}>Voltar</button>
+          </div>
+        );
+      }else{
+        return(
+          <div className="App">
+            <input type="text" placeholder="username" value={this.state.username} onChange={e => this.setState({username: e.target.value})} />
+            <input type="password" placeholder="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})} />
+            <button onClick={() => this.checkLogin()}>Login</button>
+            <p onClick={() => this.setState({signUp: true})}>Create Account</p>
+          </div>
+        );
+      }
     }
   }
 }
