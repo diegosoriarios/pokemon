@@ -60,9 +60,26 @@ class App extends Component {
       if(this.state.signUp){
         return (
           <div className="App">
-            <input className="nes-input" type="text" placeholder="username" value={this.state.username} onChange={e => this.setState({username: e.target.value})} /><br />
-            <input className="nes-input" type="password" placeholder="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})} /><br />
-            <input type="password" placeholder="confirm" value={this.state.confirm} onChange={e => this.setState({confirm: e.target.value})} /><br />
+            <input 
+              className="nes-input" 
+              type="text" 
+              placeholder="username" 
+              value={this.state.username} 
+              onChange={e => this.setState({username: e.target.value})}
+            /><br />
+            <input 
+              className="nes-input" 
+              type="password" 
+              placeholder="password" 
+              value={this.state.password} 
+              onChange={e => this.setState({password: e.target.value})} 
+            /><br />
+            <input 
+              type="password" 
+              placeholder="confirm" 
+              value={this.state.confirm} 
+              onChange={e => this.setState({confirm: e.target.value})} 
+            /><br />
             <button className="nes-btn" onClick={() => this.createAccount()} disabled={this.checkPassword()}>Create Account</button><br />
             <button className="nes-btn" onClick={() => this.setState({signUp: false})}>Voltar</button><br />
           </div>
@@ -70,8 +87,20 @@ class App extends Component {
       }else{
         return(
           <div className="App">
-            <input className="nes-input" type="text" placeholder="username" value={this.state.username} onChange={e => this.setState({username: e.target.value})} /><br />
-            <input className="nes-input" type="password" placeholder="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})} /><br />
+            <input 
+              className="nes-input" 
+              type="text" 
+              placeholder="username" 
+              value={this.state.username} 
+              onChange={e => this.setState({username: e.target.value})} 
+            /><br />
+            <input 
+              className="nes-input" 
+              type="password" 
+              placeholder="password" 
+              value={this.state.password} 
+              onChange={e => this.setState({password: e.target.value})} 
+            /><br />
             <button className="nes-btn" onClick={() => this.checkLogin()}>Login</button><br />
             <p onClick={() => this.setState({signUp: true})}>Create Account</p><br />
           </div>
