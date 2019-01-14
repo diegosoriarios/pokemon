@@ -192,7 +192,18 @@ class Pokemon extends Component {
                         <h3>Battle</h3>
                         <p>{this.state.enemy.nome}</p>
                         <img src={this.state.enemy.front} alt={this.state.enemy.nome} />
+                        <p>HP</p>
                         <p>{this.state.enemy.level}</p>
+                        <br /><br /><br /><br />
+                        <p>{this.state.pokemon[this.state.selected].nome}</p>
+                        {/* <img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} /> */}
+                        <p>HP</p>
+                        <ul>
+                            <li>{this.state.pokemon[this.state.selected].moves[0]}</li>
+                            <li>{this.state.pokemon[this.state.selected].moves[1]}</li>
+                            <li>{this.state.pokemon[this.state.selected].moves[2]}</li>
+                            <li>{this.state.pokemon[this.state.selected].moves[3]}</li>
+                        </ul><br /><br /><br /><br />
                         <button onClick={() => this.setState({showModal: false})}>Close</button>
                     </Modal>
                 </div>
