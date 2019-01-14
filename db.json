@@ -1,5 +1,25 @@
 {
-    "users": [
-        { "id": 1, "username": "sr_ninguem", "password": "teste", "pokemon" : []}
-    ]
+  "users": [
+    {
+      "username": "sr_ninguem",
+      "password": "teste",
+      "selected": 0,
+      "pokemon": [
+        {
+          "id": 14,
+          "nome": "kakuna",
+          "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png",
+          "level": 1,
+          "xp": 0,
+          "moves": [
+            "string-shot",
+            "harden",
+            "electroweb",
+            "iron-defense"
+          ]
+        }
+      ],
+      "id": 1
+    }
+  ]
 }

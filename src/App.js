@@ -22,7 +22,6 @@ class App extends Component {
          .then(response => {
            response.data.forEach(value => {
              if(value.username === this.state.username && value.password === this.state.password){
-              console.log('LOG')
               this.setState({
                 logged: true,
                 id: value.id
@@ -61,20 +60,20 @@ class App extends Component {
       if(this.state.signUp){
         return (
           <div className="App">
-            <input type="text" placeholder="username" value={this.state.username} onChange={e => this.setState({username: e.target.value})} />
-            <input type="password" placeholder="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})} />
-            <input type="password" placeholder="confirm" value={this.state.confirm} onChange={e => this.setState({confirm: e.target.value})} />
-            <button onClick={() => this.createAccount()} disabled={this.checkPassword()}>Create Account</button>
-            <button onClick={() => this.setState({signUp: false})}>Voltar</button>
+            <input type="text" placeholder="username" value={this.state.username} onChange={e => this.setState({username: e.target.value})} /><br />
+            <input type="password" placeholder="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})} /><br />
+            <input type="password" placeholder="confirm" value={this.state.confirm} onChange={e => this.setState({confirm: e.target.value})} /><br />
+            <button onClick={() => this.createAccount()} disabled={this.checkPassword()}>Create Account</button><br />
+            <button onClick={() => this.setState({signUp: false})}>Voltar</button><br />
           </div>
         );
       }else{
         return(
           <div className="App">
-            <input type="text" placeholder="username" value={this.state.username} onChange={e => this.setState({username: e.target.value})} />
-            <input type="password" placeholder="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})} />
-            <button onClick={() => this.checkLogin()}>Login</button>
-            <p onClick={() => this.setState({signUp: true})}>Create Account</p>
+            <input type="text" placeholder="username" value={this.state.username} onChange={e => this.setState({username: e.target.value})} /><br />
+            <input type="password" placeholder="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})} /><br />
+            <button onClick={() => this.checkLogin()}>Login</button><br />
+            <p onClick={() => this.setState({signUp: true})}>Create Account</p><br />
           </div>
         );
       }
