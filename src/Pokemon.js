@@ -238,10 +238,11 @@ class Pokemon extends Component {
 
     render() {
         if (!this.state.isLoading) {
+            let user = this.state.pokemon[this.state.selected]
             return (
                 <div className="App">
-                    <p>{this.state.pokemon[this.state.selected].nome}</p>
-                    {/*<img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} />*/}
+                    <p>{user.nome}</p>
+                    <img src={user.front} alt={user.nome} />
                     <p>{this.state.level}</p>
                     <p>{this.state.xp.toFixed(2)}</p><br /><br /><br /><br />
                     <button className="nes-btn" onClick={() => this.training()}>Treinar</button>
@@ -249,22 +250,23 @@ class Pokemon extends Component {
                     <Modal isOpen={this.state.showModal} className="nes-container is-rounded modal" contentLabel="Example Modal">
                         <h3>Battle</h3>
                         <p>{this.state.enemy.nome}</p>
-                        {/*<img src={this.state.enemy.front} alt={this.state.enemy.nome} />*/}
+                        <img src={this.state.enemy.front} alt={this.state.enemy.nome} />
                         <p>{this.state.enemy.hp}/{this.state.enemyHp}</p>
                         <progress className="nes-progress" value={this.state.enemy.hp} max={this.state.enemyHp}></progress>
                         <p>{this.state.enemy.level}</p>
                         <br /><br />
 
-                        <p>{this.state.pokemon[this.state.selected].nome}</p>
-                        {/*<img src={this.state.pokemon[this.state.selected].front} alt={this.state.pokemon[this.state.selected].nome} />*/}
-                        <p>{this.state.pokemon[this.state.selected].hp}/{this.state.playerHp}</p>
-                        <progress className="nes-progress" value={this.state.pokemon[this.state.selected].hp} max={this.state.playerHp}></progress>
+                        <p>{user.nome}</p>
+                        <img src={user.front} alt={user.nome} />
+                        <p>{user.hp}/{this.state.playerHp}</p>
+                        <progress className="nes-progress" value={user.hp} max={this.state.playerHp}></progress>
                         <ul className="attackList">
-                            <li onClick={() => this.attack(0)}>{this.state.pokemon[this.state.selected].moves[0]}</li>
-                            <li onClick={() => this.attack(1)}>{this.state.pokemon[this.state.selected].moves[1]}</li>
+                            {
+                                user.moves.map((move, i) => (
+                                    <li key={i} onClick={() => this.attack(i)}>{move}</li>
+                                ))
+                            }
                             <li>catch</li>
-                            <li onClick={() => this.attack(2)}>{this.state.pokemon[this.state.selected].moves[2]}</li>
-                            <li onClick={() => this.attack(3)}>{this.state.pokemon[this.state.selected].moves[3]}</li>
                             <li>run</li>
                         </ul><br />
                         <br />
